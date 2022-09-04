@@ -104,24 +104,26 @@ class App extends Component {
             onInput={this.onInput}
             placeholder="Type character name"
           ></input>
-        </div>{" "}
-        {userInput
-          ? filteredData.map((item) => (
-              <Character
-                onLike={this.onLike}
-                onDelete={this.onDelete}
-                key={item.id}
-                item={item}
-              />
-            ))
-          : apiData.map((item) => (
-              <Character
-                onLike={this.onLike}
-                onDelete={this.onDelete}
-                key={item.id}
-                item={item}
-              />
-            ))}
+        </div>
+        <div className="main_container">
+          {userInput
+            ? filteredData.map((item) => (
+                <Character
+                  onLike={this.onLike}
+                  onDelete={this.onDelete}
+                  key={item.id}
+                  item={item}
+                />
+              ))
+            : apiData.map((item) => (
+                <Character
+                  onLike={this.onLike}
+                  onDelete={this.onDelete}
+                  key={item.id}
+                  item={item}
+                />
+              ))}
+        </div>
       </>
     );
   }

@@ -36,6 +36,7 @@ img {
 .character_container {
   display: flex;
   width: 800px;
+  margin: auto;
 }
 
 .characterName_container {
