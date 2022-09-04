@@ -1,0 +1,76 @@
+@font-face {
+  font-family: Simpsonfont;
+  src: url(./assets/fonts/Simpsonfont-p07r.ttf);
+}
+
+body,
+button {
+  font-family: "Simpsonfont", "Courier New", Courier, monospace;
+}
+
+body {
+  padding: 50px;
+}
+
+img {
+  width: 100px;
+  height: auto;
+}
+
+.heart_icon_show {
+  width: 20px;
+}
+
+.heart_icon_hide {
+  display: none;
+}
+
+.search {
+  max-width: 40vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.5fr 2fr;
+  gap: 5px;
+}
+
+.character_container {
+  display: flex;
+  width: 800px;
+}
+
+.characterName_container {
+  padding: 10px;
+}
+
+.quote_container {
+  padding: 25px;
+  width: 40%;
+}
+
+.buttons_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.deleteBtn,
+.likeBtn {
+  display: block;
+  padding: 5px;
+  margin: 10px auto;
+}
+
+.like_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.image_container {
+  padding: 25px;
+}
+
+.centered {
+  text-align: center;
+}
