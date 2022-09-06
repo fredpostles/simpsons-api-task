@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Character from "./components/Character";
 import axios from "axios";
-import Simpsons from "./simpsons.json"; // backup
 import "./App.css";
+import { addIndex, sortData, removeDuplicates } from "./utils";
 
 class App extends Component {
   constructor() {
@@ -10,7 +10,7 @@ class App extends Component {
     this.userInput = React.createRef();
   }
 
-  state = { liked: 0, isActive: false, userInput: "" };
+  state = { isActive: false, userInput: "" };
 
   async componentDidMount() {
     try {
@@ -18,23 +18,14 @@ class App extends Component {
         "https://thesimpsonsquoteapi.glitch.me/quotes?count=50"
       );
 
-      apiData.data.forEach((element, index) => {
-        element.id = index;
-      });
+      const deDuplicated = removeDuplicates(apiData);
 
-      apiData.data.sort((characterOne, characterTwo) => {
-        if (characterOne.character > characterTwo.character) return 1;
-        if (characterOne.character < characterTwo.character) return -1;
+      addIndex(deDuplicated);
 
-        return 0;
-      });
-
-      this.setState({ apiData: apiData.data });
+      this.setState({ apiData: deDuplicated });
 
       this.userInput.current.focus();
-    } catch (error) {
-      this.setState({ apiData: Simpsons });
-    }
+    } catch (error) {}
   }
 
   onLike = (id) => {
@@ -70,6 +61,13 @@ class App extends Component {
     this.setState({ userInput: searchTerm });
   };
 
+  onSortAlphabetical = () => {
+    const sorted = sortData(this.state.apiData);
+    if (sorted) {
+      this.setState({ apiData: sorted });
+    }
+  };
+
   render() {
     const { apiData, userInput } = this.state;
 
@@ -93,6 +91,7 @@ class App extends Component {
       <>
         <h1 className="centered">50 Simpsons Quotes</h1>
         <h2 className="centered">You have liked {total} quotes</h2>
+        <button onClick={this.onSortAlphabetical}>Sort Alphabetically</button>
         <div className="centered search">
           <label forhtml="userInput">Search:</label>
           <input
@@ -106,7 +105,7 @@ class App extends Component {
           ></input>
         </div>
         <div className="main_container">
-          {userInput
+          {filteredData.length
             ? filteredData.map((item) => (
                 <Character
                   onLike={this.onLike}

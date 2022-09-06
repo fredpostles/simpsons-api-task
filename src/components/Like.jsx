@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import heart from "../images/heart.png";
 
 class Like extends Component {
-  state = { liked: false };
-
   render() {
     return (
       <>
