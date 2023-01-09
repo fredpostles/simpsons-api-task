@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import Character from "./components/Character";
 import axios from "axios";
 import "./App.css";
-import { addIndex, sortData, removeDuplicates } from "./utils";
+import {
+  addIndex,
+  removeDuplicates,
+  sortDataAlphabetically,
+  sortDataReverseAlphabetically,
+} from "./utils";
 
 class App extends Component {
   constructor() {
@@ -15,7 +20,7 @@ class App extends Component {
   async componentDidMount() {
     try {
       const apiData = await axios.get(
-        "https://thesimpsonsquoteapi.glitch.me/quotes?count=50"
+        "https://thesimpsonsquoteapi.glitch.me/quotes?count=25"
       );
 
       const deDuplicated = removeDuplicates(apiData);
@@ -25,7 +30,9 @@ class App extends Component {
       this.setState({ apiData: deDuplicated });
 
       this.userInput.current.focus();
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   onLike = (id) => {
@@ -62,17 +69,40 @@ class App extends Component {
   };
 
   onSortAlphabetical = () => {
-    const sorted = sortData(this.state.apiData);
+    const sorted = sortDataAlphabetically(this.state.apiData);
     if (sorted) {
       this.setState({ apiData: sorted });
     }
+
+    this.setState({
+      sorted: true,
+      reverseSorted: false,
+    });
+  };
+
+  onSortReverseAlphabetical = () => {
+    const reverseSorted = sortDataReverseAlphabetically(this.state.apiData);
+    if (reverseSorted) {
+      this.setState({ apiData: reverseSorted });
+    }
+    this.setState({
+      reverseSorted: true,
+      sorted: false,
+    });
+  };
+
+  onDecideSort = () => {
+    this.state.sorted && !this.state.reverseSorted
+      ? this.onSortReverseAlphabetical()
+      : this.onSortAlphabetical();
   };
 
   render() {
-    const { apiData, userInput } = this.state;
+    const { apiData, userInput, sorted, reverseSorted } = this.state;
+    console.log(this.state);
 
     if (apiData === undefined) {
-      return <h1>Loading...</h1>;
+      return <h1 className="centered">Loading...</h1>;
     }
 
     let total = 0;
@@ -89,9 +119,19 @@ class App extends Component {
 
     return (
       <>
-        <h1 className="centered">50 Simpsons Quotes</h1>
-        <h2 className="centered">You have liked {total} quotes</h2>
-        <button onClick={this.onSortAlphabetical}>Sort Alphabetically</button>
+        <div className="headerContainer centered">
+          <h1>25 Simpsons Quotes</h1>
+          <h2>You have liked {total} quotes</h2>
+          <button onClick={this.onDecideSort} className="sortBtn">
+            {sorted && !reverseSorted
+              ? "Sort Z to A"
+              : "Sort A to Z" || (reverseSorted && !sorted)
+              ? "Sort A to Z"
+              : "Sort Z to A" || (!sorted && !reverseSorted)
+              ? "Sort A to Z"
+              : "Sort Z to A"}
+          </button>
+        </div>
         <div className="centered search">
           <label forhtml="userInput">Search:</label>
           <input

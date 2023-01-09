@@ -4,10 +4,19 @@ export const addIndex = (apiData) => {
   });
 };
 
-export const sortData = (apiData) => {
+export const sortDataAlphabetically = (apiData) => {
   return apiData.sort((characterOne, characterTwo) => {
     if (characterOne.character > characterTwo.character) return 1;
     if (characterOne.character < characterTwo.character) return -1;
+
+    return 0;
+  });
+};
+
+export const sortDataReverseAlphabetically = (apiData) => {
+  return apiData.sort((characterOne, characterTwo) => {
+    if (characterOne.character < characterTwo.character) return 1;
+    if (characterOne.character > characterTwo.character) return -1;
 
     return 0;
   });
