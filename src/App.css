@@ -9,15 +9,24 @@ button {
 }
 
 body {
-  padding: 50px;
+  padding: 1rem;
   background-color: #6ab8e0;
   color: #fed414;
-  text-shadow: -0.2rem 0.2rem 0 black;
+  text-shadow: -0.1rem 0.1rem 0 black;
+  font-size: 0.75em;
+}
+
+h1 {
+  font-size: 1.25em;
+}
+
+h2 {
+  font-size: 1em;
 }
 
 p,
 label {
-  text-shadow: -0.1rem 0.1rem 0 black;
+  font-size: 0.9em;
 }
 
 img {
@@ -43,17 +52,18 @@ img {
 
 .character_container {
   display: flex;
-  width: 800px;
+  justify-content: space-around;
   margin: auto;
 }
 
 .characterName_container {
-  padding: 10px;
+  padding: 0.25rem;
+  max-width: 18ch;
+  width: fit-content;
 }
 
 .quote_container {
   padding: 25px;
-  width: 40%;
 }
 
 .buttons_container {
@@ -86,4 +96,37 @@ img {
 
 .sortBtn {
   margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 600px) {
+  h1 {
+    font-size: 1.5em;
+  }
+
+  h2 {
+    font-size: 1.25em;
+  }
+
+  p,
+  label {
+    font-size: 1em;
+  }
+  .characterName_container {
+    min-width: fit-content;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  h1 {
+    font-size: 2.25em;
+  }
+
+  h2 {
+    font-size: 1.75em;
+  }
+
+  p,
+  label {
+    font-size: 1.5em;
+  }
 }
