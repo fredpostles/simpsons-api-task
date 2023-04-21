@@ -9,7 +9,7 @@ button {
 }
 
 body {
-  padding: 1rem;
+  padding: 1rem 5rem;
   background-color: #6ab8e0;
   color: #fed414;
   text-shadow: -0.1rem 0.1rem 0 black;
@@ -58,12 +58,11 @@ img {
 
 .characterName_container {
   padding: 0.25rem;
-  max-width: 18ch;
   width: fit-content;
 }
 
 .quote_container {
-  padding: 25px;
+  padding: 2.5rem;
 }
 
 .buttons_container {
@@ -95,6 +94,7 @@ img {
 }
 
 .sortBtn {
+  margin: 0;
   margin-bottom: 1rem;
 }
 
